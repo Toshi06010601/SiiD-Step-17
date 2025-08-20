@@ -3,6 +3,14 @@
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{Auth::user()->name}}さんの投稿一覧
         </h2>
+        <form action="post" id="search-form">
+            <div class="w-full flex flex-row gap-1">
+                <x-input-label for="searchWord" class="font-seimibold py-2">検索ワード</x-input-label>
+                <input type="text" name="searchWord" class="w-auto py-2 border border-gray-300 rounded-md" id="searchWord">
+                <x-primary-button type="submit" id="post-search">検索</x-primary-button>
+            </div>
+        </form>
+        @vite(['resources/js/search.js'])
     </x-slot>
 
     <div class="mx-auto px-6">
@@ -13,7 +21,7 @@
         @endif --}}
         
         @foreach ($posts as $post)
-        <div class="mt-4 p-8 bg-white w-full rounded-2xl">
+        <div class="mt-4 p-8 bg-white w-full rounded-2xl each-post">
             <h1 class="p-4 text-lg font-semibold">
                 件名：
                 <a href="{{route('post.show', $post)}}" class="text-blue-600">
@@ -21,7 +29,7 @@
                 </a>
             </h1>
             <hr class="w-full">
-            <p class="mt-4 p-4">
+            <p class="mt-4 p-4 post-body">
                 {{$post->body}}
             </p>
             <div class="p-4 text-sm font-semibold">
