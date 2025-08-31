@@ -9,12 +9,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('post', PostController::class);
+Route::resource('post', PostController::class)
+->middleware(['auth', 'verified', 'noCache']);
 
 Route::get('mypost/', [PostController::class, 'myindex'])
-->name('post.myindex');
+->middleware(['auth', 'verified','noCache'])->name('post.myindex');
 
-// Route::post('post', [PostController::class, 'store'])
+// Route::post('post', [PostController::class,s 'store'])
 // ->name('post.store');
 
 
