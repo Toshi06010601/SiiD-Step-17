@@ -11,6 +11,7 @@
                 <h1 class="text-lg font-semibold">
                     {{ $post->title }}
                 </h1>
+                @if(Auth::user()->name === $post->user->name)
                 <div class="text-right">
                     <a href="{{route('post.edit', $post)}}">
                         <x-primary-button>
@@ -24,8 +25,8 @@
                             削除
                         </x-primary-button>
                     </form>
-
                 </div>
+                @endif
                 <hr class="w-full">
                 <p class="mt-4 whitespace-pre-line">
                     {{ $post->body }}
